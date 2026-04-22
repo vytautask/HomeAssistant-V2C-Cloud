@@ -27,6 +27,7 @@ def _make_client(
         side_effect=reported_error,
         return_value=None if reported_error else (reported or {}),
     )
+    client.async_get_current_state_charge = AsyncMock(return_value=None)
     client.async_get_rfid_cards = AsyncMock(
         side_effect=rfid_error,
         return_value=None if rfid_error else (rfid or []),

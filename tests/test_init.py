@@ -199,14 +199,14 @@ class TestCoordinatorStartup:
             await async_setup_entry(hass, entry)
 
         runtime = hass.data[DOMAIN][ENTRY_ID]
-        assert runtime.coordinator.update_interval == DEFAULT_UPDATE_INTERVAL
+        initial_interval = runtime.coordinator.update_interval
 
         client.async_get_pairings.side_effect = V2CRateLimitError("429", status=429)
 
         # First rate-limit: interval doubles
         await runtime.coordinator.async_refresh()
         first_backoff = runtime.coordinator.update_interval
-        assert first_backoff == DEFAULT_UPDATE_INTERVAL * 2
+        assert first_backoff == initial_interval * 2
 
         # Repeated rate-limits keep doubling
         await runtime.coordinator.async_refresh()

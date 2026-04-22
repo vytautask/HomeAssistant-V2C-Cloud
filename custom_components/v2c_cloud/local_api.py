@@ -327,7 +327,7 @@ async def async_get_or_create_local_coordinator(
         entry_data = runtime_data.coordinator.config_entry.data
         if "fallback_ip" in entry_data:
             fip = entry_data["fallback_ip"]
-            if not fip or fip == "0.0.0.0":
+            if not fip or fip == "0.0.0.0":  # nosec B104
                 return _build_realtime_from_reported(runtime_data, device_id)
 
         static_ip = resolve_static_ip(runtime_data, device_id)
@@ -425,7 +425,7 @@ async def async_get_or_create_local_coordinator(
     # Detect cloud-only to use longer poll interval and log once
     _entry_data = runtime_data.coordinator.config_entry.data
     _explicit_cloud = "fallback_ip" in _entry_data and (
-        not _entry_data["fallback_ip"] or _entry_data["fallback_ip"] == "0.0.0.0"
+        not _entry_data["fallback_ip"] or _entry_data["fallback_ip"] == "0.0.0.0"  # nosec B104
     )
     if not _explicit_cloud:
         _ip = resolve_static_ip(runtime_data, device_id)
