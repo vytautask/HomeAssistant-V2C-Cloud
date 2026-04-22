@@ -1,6 +1,7 @@
 # V2C Cloud Integration for Home Assistant
 
-# This is a clone of [another repository](https://github.com/samuelebistoletti/HomeAssistant-V2C-Cloud) and supposed is to be used until the 4G issues are fixed in the original one.
+# This is a clone of [another repository](https://github.com/samuelebistoletti/HomeAssistant-V2C-Cloud) and is supposed to be used until the 4G issues are fixed in the original one.
+
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 ![installation_badge](https://img.shields.io/badge/dynamic/json?color=41BDF5&logo=home-assistant&label=utenti&suffix=%20installs&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=%24.v2c_cloud.total)
