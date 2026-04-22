@@ -102,6 +102,9 @@
       "house_power": {
         "name": "House power"
       },
+      "grid_power": {
+        "name": "Grid power"
+      },
       "fv_power": {
         "name": "Photovoltaic power"
       },

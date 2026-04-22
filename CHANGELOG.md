@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2026-04-22
+
+### Added
+
+- **Grid power sensor** – new `GridPower` sensor (`device_class: power`, W, `state_class: measurement`) exposes the power drawn from or fed into the grid. The value was already being fetched from the charger (local `/RealTimeData` and cloud `reported` via `_REPORTED_TO_REALTIME`) but was never surfaced as a Home Assistant entity. The sensor now appears in the HA Energy dashboard's power monitor alongside House power and Charging power.
+
 ## [1.2.1] - 2026-04-22
 
 ### Fixed

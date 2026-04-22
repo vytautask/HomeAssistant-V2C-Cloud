@@ -273,6 +273,16 @@ REALTIME_SENSOR_DESCRIPTIONS: tuple[V2CLocalRealtimeSensorDescription, ...] = (
         value_fn=_as_float,
     ),
     V2CLocalRealtimeSensorDescription(
+        key="GridPower",
+        translation_key="grid_power",
+        icon="mdi:transmission-tower",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        unique_id_suffix="grid_power",
+        value_fn=_as_float,
+    ),
+    V2CLocalRealtimeSensorDescription(
         key="BatteryPower",
         translation_key="battery_power",
         icon="mdi:battery",
