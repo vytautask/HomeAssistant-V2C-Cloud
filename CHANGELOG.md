@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-04-22
+
+### Changed
+
+- **Integration domain renamed to `v2c_cloud_4g`** – the integration directory and HA domain have been renamed from `v2c_cloud` to `v2c_cloud_4g` to avoid conflicts with the upstream integration. Existing installations need to be removed and re-added via HACS.
+
+### Fixed
+
+- CI: replaced non-existent `actions/checkout@v6` with `@v4` across all workflows.
+- Tests: added missing `AsyncMock` for `async_get_current_state_charge` in gather test helpers.
+- Security: suppressed bandit B104 false positives on `0.0.0.0` sentinel checks in `local_api.py`.
+
 ## [1.1.6] - 2026-03-24
 
 ### Fixed
