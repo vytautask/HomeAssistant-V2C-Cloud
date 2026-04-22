@@ -208,9 +208,9 @@ class TestCoordinatorStartup:
         first_backoff = runtime.coordinator.update_interval
         assert first_backoff == initial_interval * 2
 
-        # Repeated rate-limits keep doubling
+        # Repeated rate-limits keep doubling (capped at MAX_RATE_LIMIT_INTERVAL)
         await runtime.coordinator.async_refresh()
-        assert runtime.coordinator.update_interval == first_backoff * 2
+        assert runtime.coordinator.update_interval == min(first_backoff * 2, MAX_RATE_LIMIT_INTERVAL)
 
         # Interval is capped at MAX_RATE_LIMIT_INTERVAL
         for _ in range(10):
