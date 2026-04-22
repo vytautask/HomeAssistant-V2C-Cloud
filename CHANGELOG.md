@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-04-22
+
+### Fixed
+
+- CI: corrected doubled `_4g_4g` path in tag-and-release workflow trigger that prevented the release from being created.
+
 ## [1.2.0] - 2026-04-22
 
 ### Changed
