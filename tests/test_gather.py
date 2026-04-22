@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from custom_components.v2c_cloud.v2c_cloud import (
+from custom_components.v2c_cloud_4g.v2c_cloud import (
     V2CRateLimitError,
     V2CRequestError,
     async_gather_devices_state,

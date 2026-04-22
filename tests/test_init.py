@@ -9,8 +9,8 @@ import pytest
 
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 
-from custom_components.v2c_cloud.const import DOMAIN
-from custom_components.v2c_cloud.v2c_cloud import V2CAuthError, V2CRateLimitError
+from custom_components.v2c_cloud_4g.const import DOMAIN
+from custom_components.v2c_cloud_4g.v2c_cloud import V2CAuthError, V2CRateLimitError
 
 DEVICE_ID = "device-abc123"
 FALLBACK_IP = "192.168.1.50"
@@ -78,14 +78,14 @@ def _patch_setup(mock_client: MagicMock, *, gather_return: dict | None = None):
 
     def _enter():
         stack.enter_context(
-            patch("custom_components.v2c_cloud.__init__.async_get_clientsession")
+            patch("custom_components.v2c_cloud_4g.__init__.async_get_clientsession")
         )
         stack.enter_context(
-            patch("custom_components.v2c_cloud.__init__.V2CClient", return_value=mock_client)
+            patch("custom_components.v2c_cloud_4g.__init__.V2CClient", return_value=mock_client)
         )
         stack.enter_context(
             patch(
-                "custom_components.v2c_cloud.__init__.async_gather_devices_state",
+                "custom_components.v2c_cloud_4g.__init__.async_gather_devices_state",
                 AsyncMock(return_value=gather_return or SAMPLE_DEVICES),
             )
         )
@@ -110,7 +110,7 @@ class TestCoordinatorStartup:
 
     async def test_normal_startup_populates_coordinator_data(self):
         """Happy path: coordinator data contains the device returned by the API."""
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
 
         hass = _make_hass()
         entry = _make_entry()
@@ -126,7 +126,7 @@ class TestCoordinatorStartup:
 
     async def test_rate_limit_no_fallback_raises_config_entry_not_ready(self):
         """With no LAN fallback, a rate-limit at startup prevents integration load."""
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
 
         hass = _make_hass()
         entry = _make_entry(fallback=False)
@@ -138,7 +138,7 @@ class TestCoordinatorStartup:
 
     async def test_rate_limit_with_fallback_loads_synthetic_data(self):
         """With LAN fallback configured, a rate-limit at startup succeeds with synthetic state."""
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
 
         hass = _make_hass()
         entry = _make_entry(fallback=True)
@@ -162,7 +162,7 @@ class TestCoordinatorStartup:
 
     async def test_rate_limit_with_existing_data_preserves_previous(self):
         """During a running poll, a rate-limit keeps the last known coordinator data intact."""
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
 
         hass = _make_hass()
         entry = _make_entry(fallback=False)
@@ -185,8 +185,8 @@ class TestCoordinatorStartup:
         """Each rate-limit cycle doubles the polling interval up to MAX_RATE_LIMIT_INTERVAL."""
         from datetime import timedelta
 
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
-        from custom_components.v2c_cloud.const import (
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.const import (
             DEFAULT_UPDATE_INTERVAL,
             MAX_RATE_LIMIT_INTERVAL,
         )
@@ -222,8 +222,8 @@ class TestCoordinatorStartup:
         import math
         from datetime import timedelta
 
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
-        from custom_components.v2c_cloud.const import RATE_LIMIT_COMMAND_RESERVE
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.const import RATE_LIMIT_COMMAND_RESERVE
 
         hass = _make_hass()
         entry = _make_entry(fallback=False)
@@ -246,7 +246,7 @@ class TestCoordinatorStartup:
 
     async def test_auth_error_raises_config_entry_auth_failed(self):
         """A 401 at startup raises ConfigEntryAuthFailed to trigger the HA re-auth flow."""
-        from custom_components.v2c_cloud.__init__ import async_setup_entry
+        from custom_components.v2c_cloud_4g.__init__ import async_setup_entry
 
         hass = _make_hass()
         entry = _make_entry()
@@ -261,7 +261,7 @@ class TestBuildSyntheticFallback:
     """Unit tests for the _build_synthetic_fallback helper."""
 
     def test_structure_is_complete(self):
-        from custom_components.v2c_cloud.__init__ import _build_synthetic_fallback
+        from custom_components.v2c_cloud_4g.__init__ import _build_synthetic_fallback
 
         data = _build_synthetic_fallback("dev-1", "10.0.0.5")
 

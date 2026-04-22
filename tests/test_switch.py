@@ -16,7 +16,7 @@ def _make_switch(
     icon_on="mdi:flash",
     icon_off="mdi:flash-off",
 ):
-    from custom_components.v2c_cloud.switch import V2CBooleanSwitch
+    from custom_components.v2c_cloud_4g.switch import V2CBooleanSwitch
 
     # Build fake local data
     local_data = {}

@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.v2c_cloud.sensor import (
+from custom_components.v2c_cloud_4g.sensor import (
     _as_flag,
     _as_float,
     _as_int,
@@ -214,7 +214,7 @@ class TestLocalizeState:
 
 def _make_local_sensor(key: str, raw_value, value_fn=None):
     """Instantiate V2CLocalRealtimeSensor with a simple coordinator payload."""
-    from custom_components.v2c_cloud.sensor import V2CLocalRealtimeSensor, V2CLocalRealtimeSensorDescription
+    from custom_components.v2c_cloud_4g.sensor import V2CLocalRealtimeSensor, V2CLocalRealtimeSensorDescription
 
     description = V2CLocalRealtimeSensorDescription(
         key=key,
@@ -243,7 +243,7 @@ class TestV2CLocalRealtimeSensorNativeValue:
         assert sensor.native_value == pytest.approx(12.5)
 
     def test_applies_value_fn(self):
-        from custom_components.v2c_cloud.sensor import _as_float
+        from custom_components.v2c_cloud_4g.sensor import _as_float
 
         # Use a non-localized key so _localize_state does not transform the value
         sensor = _make_local_sensor("ChargeEnergy", "3.5", value_fn=_as_float)
@@ -255,14 +255,14 @@ class TestV2CLocalRealtimeSensorNativeValue:
         assert sensor.native_value is None
 
     def test_returns_localized_label_for_charge_state(self):
-        from custom_components.v2c_cloud.sensor import _as_int
+        from custom_components.v2c_cloud_4g.sensor import _as_int
 
         sensor = _make_local_sensor("ChargeState", 2, value_fn=_as_int)
         # _localize_state maps 2 → "Charging"
         assert sensor.native_value == "Charging"
 
     def test_missing_key_returns_none_through_fn(self):
-        from custom_components.v2c_cloud.sensor import _as_float
+        from custom_components.v2c_cloud_4g.sensor import _as_float
 
         sensor = _make_local_sensor("HousePower", None, value_fn=_as_float)
         assert sensor.native_value is None

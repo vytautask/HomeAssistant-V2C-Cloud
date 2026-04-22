@@ -8,7 +8,7 @@ import pytest
 from aiohttp import ClientSession
 from aioresponses import aioresponses
 
-from custom_components.v2c_cloud.local_api import (
+from custom_components.v2c_cloud_4g.local_api import (
     V2CLocalApiError,
     async_write_keyword,
     resolve_static_ip,
@@ -99,7 +99,7 @@ class TestResolveStaticIp:
 
 def _make_hass_with_session(session: ClientSession) -> MagicMock:
     hass = MagicMock()
-    with patch("custom_components.v2c_cloud.local_api.async_get_clientsession", return_value=session):
+    with patch("custom_components.v2c_cloud_4g.local_api.async_get_clientsession", return_value=session):
         pass
     return hass
 
@@ -146,7 +146,7 @@ class TestAsyncWriteKeywordSsrfGuard:
                 content_type="text/plain",
             )
             with patch(
-                "custom_components.v2c_cloud.local_api.async_get_clientsession",
+                "custom_components.v2c_cloud_4g.local_api.async_get_clientsession",
                 return_value=session,
             ):
                 hass = MagicMock()
@@ -167,7 +167,7 @@ class TestAsyncWriteKeywordSsrfGuard:
                 content_type="text/plain",
             )
             with patch(
-                "custom_components.v2c_cloud.local_api.async_get_clientsession",
+                "custom_components.v2c_cloud_4g.local_api.async_get_clientsession",
                 return_value=session,
             ):
                 hass = MagicMock()
@@ -185,7 +185,7 @@ class TestAsyncWriteKeywordSsrfGuard:
                 body="error",
             )
             with patch(
-                "custom_components.v2c_cloud.local_api.async_get_clientsession",
+                "custom_components.v2c_cloud_4g.local_api.async_get_clientsession",
                 return_value=session,
             ):
                 hass = MagicMock()
@@ -234,7 +234,7 @@ class TestSsrfBoundaries:
                 content_type="text/plain",
             )
             with patch(
-                "custom_components.v2c_cloud.local_api.async_get_clientsession",
+                "custom_components.v2c_cloud_4g.local_api.async_get_clientsession",
                 return_value=session,
             ):
                 hass = MagicMock()

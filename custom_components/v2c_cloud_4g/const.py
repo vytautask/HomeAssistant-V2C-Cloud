@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 
-DOMAIN = "v2c_cloud"
+DOMAIN = "v2c_cloud_4g"
 
 CONF_API_KEY = "api_key"
 

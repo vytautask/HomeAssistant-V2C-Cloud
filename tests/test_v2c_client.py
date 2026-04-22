@@ -8,7 +8,7 @@ import pytest
 from aiohttp import ClientSession
 from aioresponses import aioresponses
 
-from custom_components.v2c_cloud.v2c_cloud import (
+from custom_components.v2c_cloud_4g.v2c_cloud import (
     V2CAuthError,
     V2CClient,
     V2CRateLimitError,

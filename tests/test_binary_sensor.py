@@ -33,7 +33,7 @@ def _make_coordinator(connected_value, reported_value=None):
 
 
 def _make_sensor(connected_value=None, reported_value=None):
-    from custom_components.v2c_cloud.binary_sensor import V2CConnectedBinarySensor
+    from custom_components.v2c_cloud_4g.binary_sensor import V2CConnectedBinarySensor
 
     coord = _make_coordinator(connected_value, reported_value)
     client = MagicMock()

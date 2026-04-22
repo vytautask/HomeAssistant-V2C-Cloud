@@ -10,7 +10,7 @@ from homeassistant.exceptions import HomeAssistantError
 
 
 def _make_button(*, coroutine_factory=None, refresh_after_call=True):
-    from custom_components.v2c_cloud.button import V2CButton
+    from custom_components.v2c_cloud_4g.button import V2CButton
 
     coord = MagicMock()
     coord.async_request_refresh = AsyncMock()
@@ -59,7 +59,7 @@ class TestV2CButtonAsyncPress:
         coord.async_request_refresh.assert_not_called()
 
     async def test_v2c_error_raises_ha_error(self):
-        from custom_components.v2c_cloud.v2c_cloud import V2CError
+        from custom_components.v2c_cloud_4g.v2c_cloud import V2CError
 
         async def _fail():
             raise V2CError("reboot failed")
@@ -69,7 +69,7 @@ class TestV2CButtonAsyncPress:
             await button.async_press()
 
     async def test_local_api_error_raises_ha_error(self):
-        from custom_components.v2c_cloud.local_api import V2CLocalApiError
+        from custom_components.v2c_cloud_4g.local_api import V2CLocalApiError
 
         async def _fail():
             raise V2CLocalApiError("local error")

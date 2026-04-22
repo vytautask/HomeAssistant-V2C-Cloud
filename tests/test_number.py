@@ -16,7 +16,7 @@ def _make_number(
     source_to_native=None,
     value_to_api=None,
 ):
-    from custom_components.v2c_cloud.number import V2CNumberEntity
+    from custom_components.v2c_cloud_4g.number import V2CNumberEntity
 
     reported_lower = {}
     reported = {}

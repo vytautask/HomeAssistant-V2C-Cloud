@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.v2c_cloud.entity import (
+from custom_components.v2c_cloud_4g.entity import (
     _OptimisticHoldMixin,
     build_device_info,
     coerce_bool,

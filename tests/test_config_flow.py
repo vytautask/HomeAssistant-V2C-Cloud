@@ -8,8 +8,8 @@ import pytest
 from aioresponses import aioresponses
 from aiohttp import ClientSession
 
-from custom_components.v2c_cloud.config_flow import _probe_local_api
-from custom_components.v2c_cloud.v2c_cloud import V2CAuthError, V2CRequestError
+from custom_components.v2c_cloud_4g.config_flow import _probe_local_api
+from custom_components.v2c_cloud_4g.v2c_cloud import V2CAuthError, V2CRequestError
 
 
 # ---------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class TestProbeLocalApi:
         payload = '{"ID": "abc123", "ChargeState": 0}'
         with aioresponses() as m:
             m.get("http://192.168.1.50/RealTimeData", status=200, body=payload, content_type="text/plain")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 device_id, error_key = await _probe_local_api(hass, "192.168.1.50")
         await session.close()
         assert device_id == "abc123"
@@ -62,7 +62,7 @@ class TestProbeLocalApi:
         hass = self._hass(session)
         with aioresponses() as m:
             m.get("http://192.168.1.50/RealTimeData", status=500, body="error")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 device_id, error_key = await _probe_local_api(hass, "192.168.1.50")
         await session.close()
         assert device_id is None
@@ -74,7 +74,7 @@ class TestProbeLocalApi:
         payload = '{"ChargeState": 2}'
         with aioresponses() as m:
             m.get("http://192.168.1.50/RealTimeData", status=200, body=payload, content_type="text/plain")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 device_id, error_key = await _probe_local_api(hass, "192.168.1.50")
         await session.close()
         assert device_id is None
@@ -85,7 +85,7 @@ class TestProbeLocalApi:
         hass = self._hass(session)
         with aioresponses() as m:
             m.get("http://192.168.1.50/RealTimeData", status=200, body="not json", content_type="text/plain")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 device_id, error_key = await _probe_local_api(hass, "192.168.1.50")
         await session.close()
         assert device_id is None
@@ -98,7 +98,7 @@ class TestProbeLocalApi:
         payload = '{"ID": "xyz99"}%'
         with aioresponses() as m:
             m.get("http://192.168.1.50/RealTimeData", status=200, body=payload, content_type="text/plain")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 device_id, error_key = await _probe_local_api(hass, "192.168.1.50")
         await session.close()
         assert device_id == "xyz99"
@@ -138,7 +138,7 @@ class TestSsrfGuardAddresses:
         session = ClientSession()
         with aioresponses() as m:
             m.get(f"http://{ip}/RealTimeData", status=200, body='{"ID": "dev1"}', content_type="text/plain")
-            with patch("custom_components.v2c_cloud.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
+            with patch("custom_components.v2c_cloud_4g.config_flow.aiohttp_client.async_get_clientsession", return_value=session):
                 hass = MagicMock()
                 device_id, error_key = await _probe_local_api(hass, ip)
         await session.close()

@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from custom_components.v2c_cloud.local_api import get_local_data, get_local_value
+from custom_components.v2c_cloud_4g.local_api import get_local_data, get_local_value
 
 
 # ---------------------------------------------------------------------------

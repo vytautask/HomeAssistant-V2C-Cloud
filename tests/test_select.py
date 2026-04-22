@@ -21,7 +21,7 @@ def _make_select(
     reported_value=None,
     options_map=None,
 ):
-    from custom_components.v2c_cloud.select import V2CEnumSelect
+    from custom_components.v2c_cloud_4g.select import V2CEnumSelect
 
     if options_map is None:
         options_map = INSTALLATION_TYPES
@@ -178,7 +178,7 @@ class TestLocalizedOptions:
     """Tests for _localized_options helper."""
 
     def test_english_options(self):
-        from custom_components.v2c_cloud.select import _localized_options
+        from custom_components.v2c_cloud_4g.select import _localized_options
 
         hass = MagicMock()
         hass.config.language = "en"
@@ -187,7 +187,7 @@ class TestLocalizedOptions:
         assert result[1] == "Three-phase"
 
     def test_italian_options(self):
-        from custom_components.v2c_cloud.select import _localized_options
+        from custom_components.v2c_cloud_4g.select import _localized_options
 
         hass = MagicMock()
         hass.config.language = "it"
@@ -195,7 +195,7 @@ class TestLocalizedOptions:
         assert result[0] == "Monofase"
 
     def test_unknown_language_falls_back_to_english(self):
-        from custom_components.v2c_cloud.select import _localized_options
+        from custom_components.v2c_cloud_4g.select import _localized_options
 
         hass = MagicMock()
         hass.config.language = "de"
